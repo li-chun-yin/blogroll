@@ -1,0 +1,22 @@
+{
+    "name": "lichunyin/blogroll",
+    "description": "网站友自动验证与添加",
+    "type": "library",
+    "license": "MIT",
+	"autoload" : {
+        "psr-4" : {
+            "lichunyin\\blogroll\\" : "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "lichunyin",
+            "email": "licy2013@aliyun.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "require-dev": {
+        "phpunit/phpunit": "^8.2@dev"
+    }
+}
