@@ -9,10 +9,14 @@ namespace lichunyin\blogroll;
 class Config implements ConfigInterface
 {
     private $link_storage;
-
+    private $site_title;
+    private $site_url;
+    
     public function __construct(array $options)
     {
-        $this->link_storage  = $options['link_storage'] ?? null;
+        $this->link_storage     = $options['link_storage'] ?? null;
+        $this->site_title       = $options['site_title'] ?? '';
+        $this->site_url         = $options['site_url'] ?? '';
     }
 
     /**
@@ -22,5 +26,25 @@ class Config implements ConfigInterface
     public function getLinkStorage() : LinkStorageInterface
     {
         return $this->link_storage;
+    }
+    
+    /**
+     * 本站友情链接标题
+     *
+     * @return string
+     */
+    public function getSiteTitle() : string
+    {
+        return $this->site_title;
+    }
+    
+    /**
+     * 本站友情链接url
+     *
+     * @return string
+     */
+    public function getSiteUrl() : string
+    {
+        return $this->site_url;
     }
 }

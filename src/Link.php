@@ -1,6 +1,8 @@
 <?php
 namespace lichunyin\blogroll;
 
+use lichunyin\blogroll\exception\MessageException;
+
 /**
  * 友情链接交换助手类
  *
@@ -42,10 +44,10 @@ class Link
      */
     public function add(string $title, string $url) : void
     {
-        $links          = $this->all();
-        $links[$title]  = $url;
-        $link_json      = json_encode($links);
-        $this->config->getLinkStorage()->save($link_json);
+        $this->check($url);
+        $links        = $this->all();
+        $links[$url]  = $title;
+        $this->config->getLinkStorage()->save($links);
     }
 
     /**
@@ -57,5 +59,19 @@ class Link
     public function all() : array
     {
         return $this->config->getLinkStorage()->read();
+    }
+    
+    /**
+     * 检查url
+     * 
+     * @param string $url
+     */
+    private function check(string $url)
+    {
+        $target_html    = @file_get_contents($url);
+        $site_url       = $this->config->getSiteUrl();
+        if(preg_match("@href=[^>]*{$site_url}@siU", $target_html) == 0){
+            throw new MessageException('你还没有添加本站友情链接，请先添加。或者友情链接检测失败，请确认你的url是否填写正确，并重试。');            
+        }
     }
 }

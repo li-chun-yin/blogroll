@@ -1,6 +1,5 @@
 <?php
     $pager = include './init.php';
-    $pager->bootstrapFrom();
+    echo $pager->bootstrapFrom();
 ?>
 
-<a href="/">返回<a>

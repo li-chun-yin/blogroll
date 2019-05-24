@@ -1,17 +1,16 @@
 <?php
-
 use PHPUnit\Framework\TestCase;
 use lichunyin\blogroll\storage\FileStorage;
 use lichunyin\blogroll\Config;
 use lichunyin\blogroll\Link;
-use lichunyin\blogroll\exception\MessageException;
+use lichunyin\blogroll\Pager;
 
-class LinkTest extends TestCase
-{    
-   /**
-    *
-    * @var Config
-    */
+class PagerTest extends TestCase
+{
+    /**
+     *
+     * @var Config
+     */
     public static $config;
     
     /**
@@ -27,10 +26,16 @@ class LinkTest extends TestCase
     public static $options;
     
     /**
-     * 
+     *
      * @var Link
      */
     public static $link;
+    
+    /**
+     * 
+     * @var Pager
+     */
+    public static $pager;
     
     /**
      *
@@ -48,6 +53,7 @@ class LinkTest extends TestCase
         static::$options            = $options;
         static::$config             = new Config($options);
         static::$link               = new Link(static::$config);
+        static::$pager              = new Pager(static::$link);
     }
     
     /**
@@ -60,21 +66,14 @@ class LinkTest extends TestCase
         unlink(static::$path);
     }
     
-    public function testConfig()
+    public function testBootstrapFrom()
     {
-        $this->assertEquals(static::$link->getConfig(), static::$config);
+        $this->assertIsString(static::$pager->bootstrapFrom());
     }
-    
-    public function testAdd()
+
+
+    public function testLinksHtml()
     {
-        //由于是否添加了友情链接的验证需要第三方网站配合，所以unit制作了测试是否抛出异常
-        $this->expectException(MessageException::class);
-        
-        static::$link->add('baidu', 'http://www.baidu.com');
-    }
-    
-    public function testAll()
-    {
-        $this->assertIsArray(static::$link->all());
+        $this->assertIsString(static::$pager->linksHtml());
     }
 }

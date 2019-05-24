@@ -47,7 +47,7 @@ class Pager
             }
         }
 
-        echo <<<FORM
+        return <<<FORM
         <!doctype html>
         <html lang="zh_CN">
             <head>
@@ -55,22 +55,35 @@ class Pager
                 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" crossorigin="anonymous">
             </head>
             <body>
-                <form id="blogroll-form">
-                    {$alert}
-                    <div class="form-group">
-                        <label for="link_title">链接标题</label>
-                        <input type="title" class="form-control" value="{$title}" id="link_title" placeholder="请输入友情链接标题" required>
+                <div class="container show">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <p>
+                                <h1>友情链接自助交换</h1>
+                                <form id="blogroll-form" method="post">
+                                    {$alert}
+                                    <div class="form-group">
+                                        <label for="link_title">链接标题</label>
+                                        <input type="text" class="form-control" value="{$title}" name="link_title" id="link_title" placeholder="请输入友情链接标题" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="link_url">链接网站url(请填写你添加本站友情链接的完整url)</label>
+                                        <input type="text" class="form-control" value="{$url}" name="link_url" id="link_url" placeholder="请输入友情链接url" required>
+                                    </div>
+                                    <button type="submit" class="btn btn-block btn-primary">请先做好本站友情链接，然后在此提交申请.</button>
+                                    <div class="form-group">
+                                    </div>
+                                </form>
+                            </p>
+                            <p><a href="https://github.com/li-chun-yin/blogroll.git">友情链接自助交换交换源码（开发者：李春寅）</a></p>
+                            <div class="alert alert-info" role="alert">本站名称：{$this->link->getConfig()->getSiteTitle()}， 本站url：{$this->link->getConfig()->getSiteUrl()}。请添加</div>
+                            <p><a href="javascript:history.back();">返回</a></p>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="link_url">链接网站url</label>
-                        <input type="password" class="form-control" value="{$url}" id="link_url" placeholder="请输入友情链接url" required>
-                    </div>
-                    <button type="button" class="btn btn-block btn-primary">请先做好本站友情链接，然后在此提交申请.</button>
-                </form>
+                </div>
             </body>
         </html>
 FORM;
-        exit;
     }
 
     /**
@@ -82,10 +95,10 @@ FORM;
     {
         $links  = $this->link->all();
         $html   = [];
-        foreach($links AS $title => $link){
-            $html[] = '<a href="' . $title . '" title="' . $title . '" _target="_blank">' . $link . '</a>';
+        foreach($links AS $link => $title){
+            $html[] = '<a href="' . $link . '" title="' . $title . '" _target="_blank">' . $title . '</a>';
         }
-        $html   = implode(' ', $html);
+        $html   = implode(' | ', $html);
         return $html;
     }
 }

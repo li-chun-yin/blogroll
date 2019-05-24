@@ -1,19 +1,17 @@
 <?php
 
 use PHPUnit\Framework\TestCase;
-use lichunyin\blogroll\storage\FileStorage;
 use lichunyin\blogroll\Config;
-use lichunyin\blogroll\Link;
-use lichunyin\blogroll\exception\MessageException;
+use lichunyin\blogroll\storage\FileStorage;
 
-class LinkTest extends TestCase
-{    
-   /**
-    *
-    * @var Config
-    */
+class ConfigTest extends TestCase
+{
+    /**
+     * 
+     * @var Config
+     */
     public static $config;
-    
+
     /**
      *
      * @var Config
@@ -21,16 +19,10 @@ class LinkTest extends TestCase
     public static $path;
     
     /**
-     *
+     * 
      * @var array
      */
     public static $options;
-    
-    /**
-     * 
-     * @var Link
-     */
-    public static $link;
     
     /**
      *
@@ -47,7 +39,6 @@ class LinkTest extends TestCase
         
         static::$options            = $options;
         static::$config             = new Config($options);
-        static::$link               = new Link(static::$config);
     }
     
     /**
@@ -60,21 +51,32 @@ class LinkTest extends TestCase
         unlink(static::$path);
     }
     
-    public function testConfig()
+    /**
+     *
+     * @return string
+     */
+    public function testGetLinkStorage()
     {
-        $this->assertEquals(static::$link->getConfig(), static::$config);
+        $this->assertEquals(static::$config->getLinkStorage(), static::$options['link_storage']);
     }
     
-    public function testAdd()
+    /**
+     * 本站友情链接标题
+     *
+     * @return string
+     */
+    public function getSiteTitle() : string
     {
-        //由于是否添加了友情链接的验证需要第三方网站配合，所以unit制作了测试是否抛出异常
-        $this->expectException(MessageException::class);
-        
-        static::$link->add('baidu', 'http://www.baidu.com');
+        $this->assertEquals(static::$config->getSiteTitle(), static::$options['site_title']);
     }
     
-    public function testAll()
+    /**
+     * 本站友情链接url
+     *
+     * @return string
+     */
+    public function getSiteUrl() : string
     {
-        $this->assertIsArray(static::$link->all());
+        $this->assertEquals(static::$config->getSiteUrl(), static::$options['site_url']);
     }
 }

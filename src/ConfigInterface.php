@@ -15,4 +15,18 @@ interface ConfigInterface
      * @return string
      */
     public function getLinkStorage() : LinkStorageInterface;
+    
+    /**
+     * 本站友情链接标题
+     * 
+     * @return string
+     */
+    public function getSiteTitle() : string;
+    
+    /**
+     * 本站友情链接url
+     * 
+     * @return string
+     */
+    public function getSiteUrl() : string;
 }
