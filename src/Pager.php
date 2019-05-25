@@ -39,7 +39,7 @@ class Pager
                 $title  = trim($_POST['link_title']);
                 $url    = trim($_POST['link_url']);
                 $this->link->add($title, $url);
-                $alert  = '已成功交换链接，谢谢合作。';
+                $alert  = '<div class="alert alert-success" role="alert">已成功交换链接，谢谢合作。</div>';
             }catch(MessageException $e){
                 $alert  = '<div class="alert alert-danger" role="alert">' . $e->getMessage() . '</div>';
             }catch(\Exception $e){
