@@ -38,7 +38,7 @@ class FileStorage implements LinkStorageInterface
     public function read() : array
     {
         $link_data  = file_get_contents($this->path);
-        return json_decode($link_data, true);
+        return (array) json_decode($link_data, true);
     }
 
     /**
