@@ -67,7 +67,7 @@ class Pager
                                         <input type="text" class="form-control" value="{$title}" name="link_title" id="link_title" placeholder="请输入友情链接标题" required>
                                     </div>
                                     <div class="form-group">
-                                        <label for="link_url">链接网站url(请填写你添加本站友情链接的完整url)</label>
+                                        <label for="link_url">链接网站url(请填写你添加本站友情链接的完整url,例如：http://licy.top)</label>
                                         <input type="text" class="form-control" value="{$url}" name="link_url" id="link_url" placeholder="请输入友情链接url" required>
                                     </div>
                                     <button type="submit" class="btn btn-block btn-primary">请先做好本站友情链接，然后在此提交申请.</button>
