@@ -2,8 +2,7 @@
     "name": "lichunyin/blogroll",
     "description": "网站友自动验证与添加",
     "type": "library",
-    "license": "MIT",
-	"autoload" : {
+    "autoload" : {
         "psr-4" : {
             "lichunyin\\blogroll\\" : "src/"
         }
